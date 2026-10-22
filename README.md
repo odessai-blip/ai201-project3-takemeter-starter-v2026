@@ -39,15 +39,13 @@
 
 ## What This Does
 
-<!-- Your community, and what your classifier sorts posts into. Three or four
-     sentences. -->
-My community is r/anime, a public subreddit for anime discussion. My classifier sorts posts into categories based on what the post is doing, such as asking a question, reporting news, or giving an opinion.
+My community is r/anime, a public subreddit for anime discussion. My classifier sorts each post into one of three labels based on what the post is doing: `question` (asks for a specific answer or recommendation for the author's own situation), `news` (reports an event or fact), or `discussion` (shares a view or opens a general conversation). I chose these because they match how people actually use the subreddit, and because each boundary can be stated in a sentence.
 
 Distinctions I noticed while reading posts:
-- Many posts ask for something, like a recommendation ("Should I watch AOT?") or what others think of a show.
-- Some posts just report news with no opinion, like a voice actor's death announcement.
-- Some posts give an opinion with reasons that can't be checked, like "the plot is hard to follow."
-- Some posts mix two types, like "Opinion on Eighty Six?", which asks a question but also shares an opinion.
+- Many posts ask for something, like a recommendation ("Should I watch AOT?") or an ID for an anime someone half remembers.
+- Some posts just report news with no opinion, like a voice actor's death announcement or a production announcement.
+- Some posts share a view or invite everyone's opinions, like "Batch releases vs weekly."
+- Some posts mix two types, like "Opinion on Eighty Six?", which shares an opinion but also asks what others think.
 
 ---
 
@@ -87,15 +85,15 @@ Distinctions I noticed while reading posts:
 
 **Which two labels:** question and discussion
 
-**The decision rule I used every time:** If the post wants a specific answer for the author's own situation, like a recommendation or an ID, it's a question. If it shares a view or opens a general conversation, it's discussion, even if it ends with "thoughts?"
+**The decision rule I used every time:** If the post wants a specific answer for the author's own situation, like a recommendation or an ID, it's a question. If it shares a view or opens a general conversation, it's discussion, even if it ends with "thoughts?". A question that polls everyone's experiences ("What anime have you...?") is discussion. For mixed posts, I check the title: if the title is the request, it's a question, and if the title shares a view or feeling, it's discussion. The subreddit's own flair never decides the label.
 
 ---
 
 ## The Dataset
 
-**Where the posts came from:** Public posts from r/anime, collected in October 2026. I gathered them by script (an Apify Reddit scraper and a script querying the Arctic Shift archive of random days from the past year) plus some copied by hand. I removed rewatch and episode threads, bot-made threads, spam, and posts that were mainly about minors, self-harm, or explicit content. I also removed usernames and personal profile links.
+**Where the posts came from:** Public posts from r/anime, collected in October 2026. I gathered them by script (an Apify Reddit scraper, and a script that queried the Arctic Shift archive for posts on random days from the past year) plus some copied by hand. I removed rewatch and episode threads, bot-made threads, spam, and posts that were mainly about minors, self-harm, abuse allegations, or explicit content. I also removed usernames and personal profile links.
 
-**How I labelled them:** I labelled 20 posts cold, before showing any label to an AI tool, and marked them `cold` in the note column. They were labelled over the session, not in one block, and three of them (Jun Maeda, the Edgerunners director, and the HxH weekly post) were also my README examples. I used Claude to pre-label 221 more rows (note: `prelabeled by Claude, checked`), and I wrote or settled the other 9 with its help. I collected extra `news` and `discussion` posts because `news` was only about 7% of my first batch.
+**How I labelled them:** I labelled 20 posts cold, before showing any label to an AI tool, and marked them `cold` in the note column. They were labelled across my working session, not in one block, and three of them (Jun Maeda, the Edgerunners director, and the HxH weekly post) were also my README examples. I used Claude to pre-label 221 more rows (note: `prelabeled by Claude, checked`), and I labelled or settled the other 9 with its help in chat. My first batch was mostly questions and had very little news (about 7%), so I collected a second batch aimed at announcements and opinion posts. To stay under the 70% cap I also removed 17 random `question` rows from the first batch.
 
 **Counts per label:**
 
@@ -130,46 +128,34 @@ Distinctions I noticed while reading posts:
 > *I chose, because:* discussion. The title is phrased as a question, but it polls everyone's own experiences and does not ask for anything for the author's situation, so it opens a general conversation.
 
 ---
+
 ## The Training Run
 
-<!-- Your starting model, your settings, and anything you changed and why. -->
+**Base model:** distilbert-base-uncased
 
-**Base model:**
+**Settings:** 3 epochs, learning rate 2e-5, batch size 16, 128 tokens per post, seed 42. Trained on an Apple Silicon GPU (mps) with PyTorch 2.14.1.
 
-**Settings:** <!-- epochs, learning rate, batch size, seed -->
+**Anything I changed from the defaults, and why:** I changed no training settings. The only edit I made in the notebook was setting `LABELS = ["question", "discussion", "news"]` to match my CSV.
 
-**Anything I changed from the defaults, and why:**
-
-**Split sizes:** <!-- train / val / test, and per-label counts in the test
-split. If a label had fewer than about 8 in test, say so — it explains a lot
-of next unit's variance. -->
-
-
+**Split sizes:** train 175 / validation 37 / test 38. Test split per label: question 20, discussion 11, news 7.
 
 ---
 
 ## How I Used AI
 
-<!-- Two specific moments — what you asked, what came back, what you changed.
-
-     ⚠️ Plus disclosure of any pre-labelling. If you had a model pre-label a
-     batch and then read and corrected every one, say that. It's an allowed
-     workflow and disclosing it costs you nothing. Not disclosing it is the
-     problem. -->
-
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I asked Claude to help me design labels for r/anime after I read posts, and I pasted real posts to check which label each one fit.
+- *What came back:* Claude suggested three labels: question, news, and opinion. It also flagged posts that sat between two labels, like a post that asks a question but also shares a view.
+- *What I changed:* I noticed that nearly every opinion post invites replies, so opinion and discussion could not be separated, and I merged them into one `discussion` label. I also added to my decision rule that a question polling everyone's experiences is discussion, and that for mixed posts I check whether the title is the request.
 
 **Moment 2**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I asked Claude how to collect about 200 posts without copying each one by hand, after Reddit's public pages stopped working for scrapers.
+- *What came back:* Claude wrote scripts, including one that samples random days from the Arctic Shift archive, and suggested an Apify scraper. It warned that Reddit's terms restrict using posts to train models and told me to check with my instructors.
+- *What I changed:* I ran the Apify scraper and the archive script, dropped posts about minors, self-harm, and abuse allegations, and removed usernames and profile links. 
 
-**Pre-labelling disclosure:**
+**Pre-labelling disclosure:** Claude pre-labelled 221 of my 250 rows from posts I collected by script. Those rows say `prelabeled by Claude, checked` in the note column. Nine more rows were labelled with Claude's help in chat, and 20 are cold labels I wrote before seeing any label from Claude.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
