@@ -41,8 +41,13 @@
 
 <!-- Your community, and what your classifier sorts posts into. Three or four
      sentences. -->
+My community is r/anime, a public subreddit for anime discussion. My classifier sorts posts into categories based on what the post is doing, such as asking a question, reporting news, or giving an opinion.
 
-
+Distinctions I noticed while reading posts:
+- Many posts ask for something, like a recommendation ("Should I watch AOT?") or what others think of a show.
+- Some posts just report news with no opinion, like a voice actor's death announcement.
+- Some posts give an opinion with reasons that can't be checked, like "the plot is hard to follow."
+- Some posts mix two types, like "Opinion on Eighty Six?", which asks a question but also shares an opinion.
 
 ---
 
