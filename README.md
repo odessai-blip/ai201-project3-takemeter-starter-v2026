@@ -53,41 +53,41 @@ Distinctions I noticed while reading posts:
 
 ## Label Taxonomy
 
-<!-- Each label: a one-sentence definition and two real examples from your
-     reading. Then your decision rule for the hardest boundary.
+### `discussion`
 
-     The decision rule is worth a point on its own and it's the thing most
-     people leave out. Every taxonomy has a hardest boundary. Name yours. -->
-
-### `label_one`
-
-**Definition:**
+**Definition:** The post shares the author's view or opens a general conversation about a show, character, or topic.
 
 **Example 1:**
->
+> Opinion on Eighty Six? I picked up simply because I saw an advertisement for it at the back of a light novel... Though what do others think of this anime?
 
 **Example 2:**
->
+> How did they manage to put out FMAB and HxH Weekly? Random thought I had, but how did they manage to put out FMAB and especially HxH 2011 weekly? Everyone bashes MAPPA for working their employees to the bone and yet I've never heard the same be said about Bones or Madhouse... Is there some context I'm missing like studios schedules being less crowded back then?
 
-### `label_two`
+### `news`
 
-**Definition:**
+**Definition:** The post reports an event or fact, with no opinion attached.
 
 **Example 1:**
->
+> Jun Maeda (writer of Angel Beats, Charlotte, original author of Clannad, Kanon and AIR) has been diagnosed with throat cancer.
 
 **Example 2:**
->
+> Cyberpunk: Edgerunners season 2 director searched Cyberpunk 2077 with a "virtual camera" to find the best Night City spots to use in the anime
+
+### `question`
+
+**Definition:** The post asks for a specific answer or recommendation for the author's own situation.
+
+**Example 1:**
+> Should I actually watch aot. All my friends tell me to watch aot, I tried the first 10 episodes and got bored quickly, should I keep watching, note that aot is my first ever anime I usually watch tv shows, do you guys recommend anything else?
+
+**Example 2:**
+> Is there an anime where it's an Isekai to a fantasy world where the one transfered/reincarnated is like senku from Dr. Stone? I want to see a science guy go into a fantasy world, and test everything with the mind of a scientist... I wondered if such anime/manga exist
 
 ### The hardest boundary
 
-**Which two labels:**
+**Which two labels:** question and discussion
 
-**The decision rule I used every time:**
-<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
-     if the tone is heated." -->
-
-
+**The decision rule I used every time:** If the post wants a specific answer for the author's own situation, like a recommendation or an ID, it's a question. If it shares a view or opens a general conversation, it's discussion, even if it ends with "thoughts?"
 
 ---
 
