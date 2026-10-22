@@ -55,11 +55,11 @@ whether you hit them:
 
 <!-- Your criterion. It must name a number. -->
 
-
+1. Overall accuracy is at least 90% on the held-out set.
 
 **Why this target:**
 
-
+At a glance, it seems that 50% of the posts are news, 25% are questions, and 25% are discussions. The posts are pretty straightforward, so I don't expect many to be mislabeled. About 10% of the posts seem borderline between question and discussion and may actually contain both. So I expect a maximum of 10% mislabeling.
 
 ---
 
@@ -67,11 +67,11 @@ whether you hit them:
 
 <!-- Your criterion. -->
 
-
+2. F1 for `news` is at least 99% on the held-out set.
 
 **Why this target:**
 
-
+This is the most straightforward label.
 
 ---
 
@@ -79,11 +79,11 @@ whether you hit them:
 
 <!-- Your criterion. -->
 
-
+3. F1 for `question` and for `discussion` is at least 80% each.
 
 **Why this target:**
 
-
+Considering that about 10% of the posts that are questions or discussions (the other 50% of my data) are borderline.
 
 ---
 
@@ -91,11 +91,11 @@ whether you hit them:
 
 <!-- Your criterion. -->
 
-
+4. No label is above 70% of labels.csv.
 
 **Why this target:**
 
-
+A lot of the posts are news, but it doesn't dominate this much.
 
 ---
 
@@ -103,11 +103,11 @@ whether you hit them:
 
 <!-- Your criterion. -->
 
-
+5. When I label the same posts again later, I agree with myself on at least 95% of them.
 
 **Why this target:**
 
-
+I think my criteria for judging borderline posts, internally and based on the comments, will remain the same.
 
 ---
 
