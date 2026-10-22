@@ -93,51 +93,43 @@ Distinctions I noticed while reading posts:
 
 ## The Dataset
 
-<!-- Where you collected from, how you labelled, your counts, and three hard
-     cases. -->
+**Where the posts came from:** Public posts from r/anime, collected in October 2026. I gathered them by script (an Apify Reddit scraper and a script querying the Arctic Shift archive of random days from the past year) plus some copied by hand. I removed rewatch and episode threads, bot-made threads, spam, and posts that were mainly about minors, self-harm, or explicit content. I also removed usernames and personal profile links.
 
-**Where the posts came from:**
-
-**How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
-Say so plainly — the disclosure is required, not penalised. -->
+**How I labelled them:** I labelled 20 posts cold, before showing any label to an AI tool, and marked them `cold` in the note column. They were labelled over the session, not in one block, and three of them (Jun Maeda, the Edgerunners director, and the HxH weekly post) were also my README examples. I used Claude to pre-label 221 more rows (note: `prelabeled by Claude, checked`), and I wrote or settled the other 9 with its help. I collected extra `news` and `discussion` posts because `news` was only about 7% of my first batch.
 
 **Counts per label:**
 
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+| question | 133 | 53.2% |
+| discussion | 74 | 29.6% |
+| news | 43 | 17.2% |
+| **Total** | 250 | 100% |
 
 **Three hard cases**
 
-<!-- Any post that made you pause: what it was, which two labels it could have
-     been, and what you chose. These are worth more than the easy 190. -->
-
 **1.**
-> *The post:*
+> *The post:* "Opinion on Eighty Six? I picked up simply because I saw an advertisement for it at the back of a light novel... Though what do others think of this anime?"
 >
-> *Could have been:*
+> *Could have been:* question or discussion
 >
-> *I chose, because:*
+> *I chose, because:* discussion. The author has already started the show and shares an opinion (hard to follow, some parts feel cliche), then asks what others think. That is a general conversation, not a request for a specific answer or recommendation for their own situation.
 
 **2.**
-> *The post:*
+> *The post:* "Is there an anime where it's an Isekai to a fantasy world where the one transfered/reincarnated is like senku from Dr. Stone? I want to see a science guy go into a fantasy world..."
 >
-> *Could have been:*
+> *Could have been:* question or discussion
 >
-> *I chose, because:*
+> *I chose, because:* question. The subreddit flair says Discussion, but the post asks for a specific recommendation that fits the author's own taste, which is what my rule calls a question. The flair did not decide the label.
 
 **3.**
-> *The post:*
+> *The post:* "What Anime is hard to watch again because you know the ending already? I was trying to rewatch Remake our Life!... What anime have you found that you have no interesting going back to...?"
 >
-> *Could have been:*
+> *Could have been:* question or discussion
 >
-> *I chose, because:*
+> *I chose, because:* discussion. The title is phrased as a question, but it polls everyone's own experiences and does not ask for anything for the author's situation, so it opens a general conversation.
 
 ---
-
 ## The Training Run
 
 <!-- Your starting model, your settings, and anything you changed and why. -->
